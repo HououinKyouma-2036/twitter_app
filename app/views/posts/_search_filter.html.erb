@@ -1,0 +1,11 @@
+<div class="search-filter">
+  <%= form_with(url: root_path, method: :get, local: true, class: "search-form") do |f| %>
+    <div class="search-input-group">
+      <%= f.text_field :username, 
+          placeholder: "Filter by username...",
+          value: params[:username],
+          class: "search-input" %>
+      <%= f.submit "Search", class: "search-button" %>
+    </div>
+  <% end %>
+</div>

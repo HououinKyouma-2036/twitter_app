@@ -1,0 +1,19 @@
+<div id="comment-<%= comment.id %>" class="comment">
+  <% unless comment.archived? %>
+    <div class="comment-metadata">
+      <p>By: <%= comment.user&.username || 'Unknown User' %></p>
+    </div>
+    
+    <div class="comment-content">
+      <%= comment.body %>
+    </div>
+
+    <% if comment.user == current_user %>
+      <%= link_to "Delete", [comment.post, comment], 
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure?"
+          } %>
+    <% end %>
+  <% end %>
+</div>

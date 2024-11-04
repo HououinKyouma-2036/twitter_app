@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>Latest Posts</h1>
+  <%= render 'search_filter' %>
+</div>
+
+<div class="posts-container">
+  <% @posts.each do |post| %>
+    <% unless post.archived? %>
+      <%= render 'post_preview', post: post %>
+    <% end %>
+  <% end %>
+</div>
+
+<% if logged_in? %>
+  <div class="new-post-action">
+    <%= link_to "New Post", new_post_path, class: "button" %>
+  </div>
+<% end %>

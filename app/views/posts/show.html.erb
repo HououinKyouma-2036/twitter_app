@@ -1,0 +1,38 @@
+<div class="post-container">
+  <h1 class="post-title"><%= @post.title %></h1>
+
+  <div class="post-metadata">
+    <p>Written by: <%= @post.user.username %> • <%= time_ago_in_words(@post.created_at) %> ago</p>
+  </div>
+
+  <div class="post-content">
+    <%= simple_format(@post.body) %>
+  </div>
+
+  <% if @post.user == current_user %>
+    <ul class="post-actions">
+      <li><%= link_to "Edit", edit_post_path(@post), class: "edit" %></li>
+      <li>
+        <%= link_to "Delete", post_path(@post), 
+            class: "delete",
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Are you sure you want to delete this post?"
+            } %>
+      </li>
+    </ul>
+  <% end %>
+
+  <section class="comments-section">
+    <h2 class="comments-title">Comments (<%= @post.comments.count %>)</h2>
+    
+    <div class="comment-list">
+      <%= render @post.comments %>
+    </div>
+
+    <div class="new-comment">
+      <h3>Add a comment</h3>
+      <%= render 'comments/form', post: @post %>
+    </div>
+  </section>
+</div>

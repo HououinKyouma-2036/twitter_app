@@ -1,0 +1,17 @@
+<div class="post-preview">
+  <h2><%= link_to post.title, post_path(post) %></h2>
+  
+  <div class="post-metadata">
+    <span class="author">By: <%= post.user.username %></span>
+    <span class="comments-count">
+      <%= link_to "#{post.comments.count} comments", post_path(post, anchor: 'comments') %>
+    </span>
+    <span class="updated-at">
+      Last updated: <%= time_ago_in_words(post.updated_at) %> ago
+    </span>
+  </div>
+
+  <div class="post-content-preview">
+    <%= truncate(post.body, length: 200) %>
+  </div>
+</div>
